@@ -3,24 +3,29 @@
     <div id="app">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
       <nav id="navColor" class="navbar shadow p-3 mb-2 rounded navbar-light bg-light justify-content-between">
+
         <a class="navbar-brand"><i id="theK" class="fab fa-kickstarter-k"></i>anban
           <i id="theK" class="fab fa-kickstarter-k"></i>abana <i class="fas fa-umbrella-beach"></i></a>
 
-        <form class="form-inline">
-          <button v-show="isBoardPage" class="btn btn-primary" @click="createList">
-            <i class="fas fa-clipboard-list"></i> New List
-          </button>
+        <form class="form">
+          <div class="button-container">
+            <button v-show="isBoardPage" class="btn btn-primary" @click="createList">
+              <i class="fas fa-clipboard-list"></i> New List
+            </button>
+            <button class="btn btn-primary" @click="showModalForm(MODAL_USAGE.USER)">Edit User</button>
+            <button class="btn btn-primary" v-show="isBoardPage" @click="showModalForm(MODAL_USAGE.COLLABORATORS)">Edit
+              Collaborators</button>
+          </div>
+        </form>
 
-          <button @click="showModalForm(MODAL_USAGE.USER)">Edit User</button>
-          <button v-show="isBoardPage" @click="showModalForm(MODAL_USAGE.COLLABORATORS)">Edit Collaborators</button>
-
+        <form class="form">
           <router-link id="log-out" v-show="!isLogin" to="/login"> logout <i class="fas fa-sign-out-alt"></i>
           </router-link>
-
         </form>
-      </nav>
 
+      </nav>
       <router-view />
     </div>
 
@@ -112,6 +117,7 @@
 <style>
   #log-out {
     margin-left: 5px;
+    float: right;
   }
 
   .page-img {
@@ -161,5 +167,17 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  .button-container {
+    width: 100%;
+    /* display: flex; */
+    justify-content: center;
+    align-content: center;
+  }
+
+  .btn {
+    margin-left: 5px;
+    margin-right: 5px;
   }
 </style>
