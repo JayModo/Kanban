@@ -60,6 +60,7 @@ export default {
     },
     async deleteListById({ dispatch }, listId) {
       try {
+
         let endPoint = `${listId}`;
         await api.delete(endPoint);
       } catch (error) {
@@ -69,6 +70,7 @@ export default {
 
     async deleteList({ commit, dispatch }, list) {
       try {
+        debugger
         let listId = list._id
         let boardId = list.board
 

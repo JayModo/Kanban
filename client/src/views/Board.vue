@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid test">
     <div class="row board-title">
-      <click-edit v-if="board.title" :initialValue="board.title" :placeHolder="'Board Title...'"
+      <click-edit class="Title" v-if="board.title" :initialValue="board.title" :placeHolder="'Board Title...'"
         :enterKeyPress="changeBoardTitle">
       </click-edit>
     </div>
@@ -47,6 +47,7 @@
     },
 
     methods: {
+
       getTasksByListId(listId) {
         let result = this.$store.state.Tasks.tasks[listId];
         return result;
@@ -76,7 +77,9 @@
 </script>
 <style scoped>
   .board-title {
+    text-align-last: center;
     margin-bottom: 10px;
+    font-size: 2rem;
   }
 
   .scrolling-wrapper {
@@ -88,7 +91,7 @@
   }
 
   .list {
-    display: inline-block !important;
+    /* display: inline-block !important; */
   }
 
   .test {
