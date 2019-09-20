@@ -3,6 +3,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 let _schema = new Schema({
+  creator: {type: ObjectId, ref: 'User', required: true},
   user: {type: ObjectId, ref: 'User', required: true},
   board: { type: ObjectId, ref: 'Board', required: true }
 }, { timestamps: true })

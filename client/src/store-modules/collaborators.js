@@ -21,7 +21,7 @@ let api = Axios.create({
 
 export default {
   state: {
-    collaborators : {
+    collaborators: {
       // board_1_id: ['array of collaborators'],
       // board_2_id: ['array of collaborators']
     }
@@ -49,24 +49,24 @@ export default {
       }
     },
 
-    async createCollaborator({dispatch}, payload) {
+    async addCollaborator({ dispatch }, collaborator) {
       try {
-        let boardId = payload.boardId
-        let collaborator = payload.collaborator
-        let endPoint = `${boardId}/collaborators`
-        
+        let boardId = collaborator.board
+        let collaboratorId = collaborator.user
+        let endPoint = `${boardId}/collaborators/${collaboratorId}`
+
         await api.post(endPoint, collaborator)
-        
+
         dispatch('getCollaborators', boardId)
       } catch (error) {
         console.error('store-modules > template.js > actions: createCollaborators()')
       }
     },
 
-    async deleteCollaborator({dispatch}, payload) {
+    async removeCollaborator({ dispatch }, payload) {
       try {
         let boardId = payload.board
-        let collaboratorId = payload.collaborator._id
+        let collaboratorId = payload._id
         let endPoint = `${boardId}/collaborators/${collaboratorId}`
 
         await api.delete(endPoint)
@@ -77,7 +77,7 @@ export default {
       }
     },
 
-    async editCollaborator({dispatch}, payload) {
+    async editCollaborator({ dispatch }, payload) {
       try {
         let boardId = payload.board
         let collaboratorId = payload.collaboratorId
