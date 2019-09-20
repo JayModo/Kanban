@@ -7,10 +7,12 @@
         <input type="text" placeholder="description" v-model="newBoard.description">
         <button class="btn btn-primary" type="submit">Create Board</button>
       </form>
-      <div v-for="board in boards" :key="board._id">
-        <router-link id="boardTitles" :to="{name: 'board', params: {boardId: board._id}}"><i
-            class="far fa-folder-open"></i>
-          {{board.title}}
+
+      <div v-for="board in boards" :boards="board" :key="board._id">
+        <button class="btn btn-danger" v-on:click="deleteBoard(board._id)"><i class="far fa-trash-alt"></i>
+        </button>
+        <router-link id="boardTitles" :to="{name: 'board', params: {boardId: board._id}}">
+          <h7> {{board.title}} </h7>
         </router-link>
       </div>
     </div>
@@ -36,12 +38,18 @@
         }
       };
     },
+
     computed: {
       boards() {
         return this.$store.state.Boards.boards;
       }
     },
+
     methods: {
+      deleteBoard(boardId) {
+        debugger
+        this.$store.dispatch('deleteBoard', boardId)
+      },
       addBoard() {
         this.$store.dispatch("addBoard", this.newBoard);
         this.newBoard = { title: "", description: "" };
@@ -50,6 +58,10 @@
   };
 </script>
 <style scoped>
+  #boardTitles {
+    color: black;
+  }
+
   h4 {
     margin-top: 3px;
   }

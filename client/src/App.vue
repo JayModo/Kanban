@@ -5,7 +5,7 @@
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
       <nav id="navColor" class="navbar shadow p-3 mb-2 rounded navbar-light bg-light justify-content-between">
         <a class="navbar-brand"><i id="theK" class="fab fa-kickstarter-k"></i>anban
-          <i id="theK" class="fab fa-kickstarter-k"></i>abana <i class="fas fa-umbrella-beach"></i></a>
+          <i id="theK" class="fab fa-kickstarter-k"></i>abana <i id="umbrella" class="fas fa-umbrella-beach"></i></a>
 
         <form class="form-inline">
           <button v-show="isBoardPage" class="btn btn-primary" @click="createList">
@@ -131,7 +131,7 @@
   :root {
     --root-color: red;
     --list-border-color: grey;
-    --list-border-size: 2px;
+    --list-border-size: .5px;
     --list-border-radius: 10px;
     --list-background-color: var(--root-color);
   }

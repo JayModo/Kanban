@@ -159,7 +159,7 @@
     padding: 10px;
     border-radius: var(--list-border-radius);
     border: solid var(--list-border-color) var(--list-border-size);
-    box-shadow: 4px 4px 12px black;
+    box-shadow: 1px 2px 4px rgb(24, 109, 124);
   }
 
   .new-task {

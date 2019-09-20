@@ -31,8 +31,33 @@ export default {
     setBoards(state, boards) {
       state.boards = boards;
     },
+    deleteBoard(state, board) {
+      state.boards = board
+    }
   },
   actions: {
+    async deleteBoard({ commit, dispatch }, board) {
+      try {
+        let boardId = board
+        let endPoint = `${boardId}`;
+        await api.delete(endPoint);
+        dispatch("getBoards")
+      } catch (error) {
+        alert('store-module boards.js actions deleteBoard() ')
+      }
+    },
+    async deleteList({ commit, dispatch }, board) {
+      try {
+        let boardId = `${board._id}`
+        let endPoint = `${boardId}`;
+        await api.delete(endPoint);
+
+        dispatch("getBoards", boardId);
+      } catch (error) {
+        console.error('store-modules > lists.js > actions > deleteList()')
+      }
+    },
+
     async getBoards({ commit, dispatch }) {
       try {
         let axiosRes = await api.get("");
@@ -61,6 +86,7 @@ export default {
 
     async editBoard({ commit, dispatch }, board) {
       try {
+        debugger
         let endPoint = `${board._id}`
         let axiosRes = await api.put(endPoint, board)
         let edit = axiosRes.data
@@ -71,7 +97,7 @@ export default {
       }
     },
 
-    async loadBoard({dispatch}, boardId){
+    async loadBoard({ dispatch }, boardId) {
       try {
         this.$store.dispatch("getBoardById", this.$route.params.boardId);
         this.$store.dispatch("getLists", this.$route.params.boardId);
