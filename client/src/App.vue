@@ -13,7 +13,7 @@
           </button>
 
           <button @click="showModalForm(MODAL_USAGE.USER)">Edit User</button>
-          <button @click="showModalForm(MODAL_USAGE.COLLABORATORS)">Edit Collaborators</button>
+          <button v-show="isBoardPage" @click="showModalForm(MODAL_USAGE.COLLABORATORS)">Edit Collaborators</button>
 
           <router-link id="log-out" v-show="!isLogin" to="/login"> logout <i class="fas fa-sign-out-alt"></i>
           </router-link>
@@ -27,8 +27,7 @@
     <!-- <my-modal @close="showModal = false" :show-modal="showModal"></my-modal> -->
     <my-modal :closeCallBack="modalCloseCallBack" :showModal="showModal">
       <user v-if="modalUsage === MODAL_USAGE.USER" />
-      <collaborators v-if="modalUsage === MODAL_USAGE.COLLABORATORS" :cancelCallBack="modalCloseCallBack">
-      </collaborators>
+      <collaborators v-if="modalUsage === MODAL_USAGE.COLLABORATORS" :cancelCallBack="modalCloseCallBack" />
     </my-modal>
   </div>
 </template>

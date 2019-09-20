@@ -11,14 +11,14 @@
       </div>
       <input v-model="email" type="text" class="form-control" placeholder="e-Mail">
       <div class="input-group-append">
-        <button v-show="isEmail" class="btn btn-outline-secondary" type="button">Add</button>
+        <button @click="addCollaborator" v-show="isEmail" class="btn btn-outline-secondary" type="button">Add</button>
       </div>
     </div>
 
-    <ul class="collaborators">
-      <collaborators v-for="collaborator in collaborators" :key="collaborator._id" :collaborator="collaborator">
-      </collaborators>
-    </ul>
+    <div class="collaborators">
+      <collaborator v-for="collaborator in collaborators" :key="collaborator._id" :collaborator="collaborator">
+      </collaborator>
+    </div>
 
     <div class="button-container">
       <button @click="close" class="btn btn-primary">Ok</button>
@@ -29,20 +29,20 @@
 
 <script>
   export default {
-    name: 'collaborator',
+    name: 'collaborators',
     props: {
       cancelCallBack: { type: Function }
     },
     computed: {
-      boardId() {
-        let result = this.$store.state.Boards.activeBoard._id
-      },
       collaborators() {
-        let result = this.$store.state.Collaborators.collaborators[this.boardId]
+        return this.$store.state.Collaborators.collaborators[this.$route.params.boardId]
+      },
+      users() {
+        let users = this.$store.state.Auth.users
+        return users
       },
       emails() {
-
-        let users = this.$store.state.Auth.users
+        let users = this.users
 
         let emailArray = users.map(user => {
           return user.email
@@ -55,6 +55,13 @@
       isEmail() {
         let result = this.emails.has(this.email)
         return result
+      },
+      user() {
+        let users = this.users
+
+        let user = users.find(user => user.email === this.email) || {}
+
+        return user
       }
     },
     data() {
@@ -65,7 +72,18 @@
     methods: {
       close() {
         this.cancelCallBack()
+      },
+      addCollaborator() {
+        let collaborator = {
+          board: this.$route.params.boardId,
+          creator: this.userId(),
+          user: this.user._id
+        }
+        this.$store.dispatch('addCollaborator', collaborator)
       }
+    },
+    mounted() {
+      this.$store.dispatch('getCollaborators', this.$route.params.boardId)
     }
   }
 </script>
