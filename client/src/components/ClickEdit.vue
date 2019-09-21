@@ -63,6 +63,11 @@
       },
       click(event) {
         event.preventDefault();
+
+        if (this.editing) {
+          return
+        }
+
         this.editing = true;
         let pos = event.target.value.length;
 
