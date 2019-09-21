@@ -13,6 +13,7 @@ Vue.component('my-modal', MyModal);
 Vue.component('collaborators', Collaborators);
 Vue.component('collaborator', Collaborator);
 
+// document.getElementById('').getElementsByClassName()
 
 Vue.mixin({
   methods: {

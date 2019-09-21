@@ -21,15 +21,14 @@
 
     <!-- DRAGGABLE CONTAINER -->
     <draggable v-model="myList" group="myGroup" class="list-group" :move="checkMove" @start="startDrag" @add="onDrop">
-
-
-
       <transition-group type="transition" :name="'flip-list'">
         <task :data-list="boardList._id" class="list-group-item" v-for="task in myList" :task="task" :key="task._id">
           {{ task.description }}
         </task>
       </transition-group>
     </draggable>
+
+    <!-- CREATE NEW TASKS -->
     <p class="new-task" @click="createNewTask">
       <i class="fas fa-tasks"> </i> New Task
     </p>
@@ -58,6 +57,20 @@
       };
     },
     methods: {
+      createTaskIfNew() {
+        // debugger
+
+        if (this.boardList.title === '') {
+          this.createNewTask()
+        }
+
+        return
+
+        // let titleElement = this.$el.getElementsByClassName('list-title')[0]
+        // if (titleElement && titleElement.value === '') {
+        //   this.createNewTask()
+        // }
+      },
       checkMove(event, originalEvent) {
         // Stuff
       },
@@ -94,14 +107,6 @@
         let list = this.boardList;
 
         this.$store.dispatch("deleteList", list)
-
-        // this.$store.dispatch("deleteListById", list._id);
-        // this.$store.dispatch("getLists", list.board);
-
-        // this.$store.state.Lists.lists.forEach(element => {
-        //   let listId = element._id;
-        //   this.$store.dispatch("getTasksByListId", listId);
-        // });
       },
       orderList() {
         this.list = this.list.sort((one, two) => {
@@ -154,6 +159,7 @@
     mounted() {
       let listId = this.boardList._id;
       this.$store.dispatch("getTasksByListId", listId);
+      this.createTaskIfNew()
     }
   };
 </script>

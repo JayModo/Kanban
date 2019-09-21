@@ -1,5 +1,5 @@
 <template>
-  <textarea rows="1" type="text"
+  <textarea rows="1" type="text" class="click-edit"
     v-bind:class="[editing ? 'editing' : 'dormant', 'input-group-prepend', 'form-control', 'my-class']"
     v-model="editValue" v-bind:placeholder="placeHolder" @change.prevent="resize($event)" @cut="delayedResize($event)"
     @paste="delayedResize($event)" @click.prevent="click($event)" @keydown="keyDown($event)"
@@ -26,15 +26,36 @@
 
     },
     mounted() {
-      this.editValue = this.initialValue
+      this.editValue = ''
       this.initialValueToUse = this.initialValue;
+
+      setInterval(() => {
+        this.editValue = this.initialValue
+        this.resize(undefined)
+      }, 200)
+
     },
     methods: {
+      getTextArea() {
+        debugger
+        let textArea = this.$el.getElementsByClassName('click-edit')[0]
+        if (textArea) {
+          return textArea
+        }
+        return undefined
+      },
       delayedResize() {
         window.setTimeout(this.resize(event), 0);
       },
       resize(event) {
-        let textarea = event.target
+        // let textArea = this.getTextArea()
+
+        // if (!textarea) {
+        //   textarea = event.target
+        // }
+
+        let textarea = this.$el
+
         textarea.style.height = 'auto';
         textarea.style.height = textarea.scrollHeight + 'px';
       },
