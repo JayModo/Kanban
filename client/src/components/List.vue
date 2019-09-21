@@ -175,6 +175,9 @@
     color: grey;
     float: left;
     font-size: 1.4em;
+    margin-top: 3px;
+    margin-left: 2px;
+    margin-bottom: -5px !important;
   }
 
   .input-group-append {
