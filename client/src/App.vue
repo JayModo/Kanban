@@ -127,19 +127,52 @@
     background-position: center;
   }
 
-  #app {}
-
   #theK {
     transform: rotate(-10deg);
   }
 
   :root {
+    --board-list-area-height: 75vh !important;
+    --list-scroll-height: calc(0.706667 * var(--board-list-area-height));
+
     --root-color: red;
     --list-border-color: grey;
     --list-border-size: .5px;
     --list-border-radius: 10px;
     --list-background-color: var(--root-color);
+
+    --task-area-border-color: rgba(128, 128, 128, 0.507);
+
+
+    --secondary-border-radius: 7px;
+    --tertiary-border-radius: 4px;
   }
+
+  /* The Scroll Bars */
+  /* width */
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    margin: 0px !important;
+
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(153, 153, 153, 0.548);
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #418fcf;
+  }
+
 
   #app {
     font-family: "Avenir", Helvetica, Arial, sans-serif;

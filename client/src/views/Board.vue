@@ -86,8 +86,8 @@
     overflow-x: scroll !important;
     overflow-y: hidden !important;
     white-space: nowrap !important;
-    max-height: 78vh !important;
-    min-height: 78vh !important;
+    max-height: var(--board-list-area-height);
+    min-height: var(--board-list-area-height);
   }
 
   .list {

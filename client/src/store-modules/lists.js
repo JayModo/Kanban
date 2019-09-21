@@ -70,7 +70,6 @@ export default {
 
     async deleteList({ commit, dispatch }, list) {
       try {
-        debugger
         let listId = list._id
         let boardId = list.board
 

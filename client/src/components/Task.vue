@@ -82,6 +82,12 @@
 </script>
 
 <style scoped>
+  .task {
+    border-radius: var(--tertiary-border-radius);
+    margin-bottom: 3px;
+    margin-right: 3px;
+  }
+
   .task-edit {
     font-size: 1.1em;
     background-color: rgba(211, 211, 211, 0);

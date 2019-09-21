@@ -199,8 +199,12 @@
   }
 
   .list-group {
-    /* border: solid red 1px; */
+    /* border: solid var(--task-area-border-color) 1px;
+    padding: 2px;
+    border-radius: var(--secondary-border-radius); */
     min-height: 50px;
+    max-height: var(--list-scroll-height);
+    overflow-y: scroll;
   }
 
   .list-group-item {
