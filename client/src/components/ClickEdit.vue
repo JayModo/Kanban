@@ -1,9 +1,9 @@
 <template>
   <textarea rows="1" type="text" class="click-edit"
     v-bind:class="[editing ? 'editing' : 'dormant', 'input-group-prepend', 'form-control', 'my-class']"
-    v-model="editValue" v-bind:placeholder="placeHolder" @change.prevent="resize($event)" @cut="delayedResize($event)"
-    @paste="delayedResize($event)" @click="click($event)" @keydown="keyDown($event)" @focusout="focusOut($event)"
-    v-bind:readonly="!editing" />
+    v-model="editValue" v-bind:placeholder="placeHolder" @change.prevent="resize" @cut="delayedResize"
+    @paste="delayedResize" @click.prevent="click($event)" @keydown="keyDown($event)" @focusout="focusOut($event)"
+    @resize="resize" v-bind:readonly="!editing" />
   </template>
 
 <script>
@@ -26,32 +26,33 @@
 
     },
     mounted() {
+      // debugger
       this.editValue = ''
       this.initialValueToUse = this.initialValue;
 
-      setInterval(() => {
+      setTimeout(() => {
+        this.$el.onresize = this.resize()
         this.editValue = this.initialValue
-        this.resize(undefined)
-      }, 200)
+        this.resize()
+      }, 100)
 
     },
     methods: {
-      getTextArea() {
-        debugger
-        let textArea = this.$el.getElementsByClassName('click-edit')[0]
-        if (textArea) {
-          return textArea
-        }
-        return undefined
-      },
       delayedResize() {
-        window.setTimeout(this.resize(event), 0);
+        window.setTimeout(this.resize(), 0);
       },
       resize(event) {
-        let textarea = this.$el
+        window.setTimeout(() => {
+          let textarea = this.$el
 
-        textarea.style.height = 'auto';
-        textarea.style.height = textarea.scrollHeight + 'px';
+          this.$el.onresize = undefined
+
+          textarea.style.height = 'auto';
+          textarea.style.height = textarea.scrollHeight + 'px';
+
+          this.$el.onresize = this.resize()
+        }, 1);
+
       },
       cancel(event) {
         window.getSelection().removeAllRanges();
@@ -95,13 +96,11 @@
             this.cancel(event);
             break;
           default:
-            this.delayedResize(event)
+          // this.delayedResize(event)
         }
       },
       focusOut(event) {
         this.cancel(event);
-        // this.$el.classList.remove("editing");
-        // this.$el.classList.add("dormant");
       }
     }
   };
