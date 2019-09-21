@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid test">
-    <div class="row board-title">
-      <click-edit class="Title" v-if="board.title" :initialValue="board.title" :placeHolder="'Board Title...'"
+    <div class="row">
+      <click-edit class="board-title" v-if="board.title" :initialValue="board.title" :placeHolder="'Board Title...'"
         :enterKeyPress="changeBoardTitle">
       </click-edit>
     </div>
@@ -88,10 +88,6 @@
     white-space: nowrap !important;
     max-height: var(--board-list-area-height);
     min-height: var(--board-list-area-height);
-  }
-
-  .list {
-    /* display: inline-block !important; */
   }
 
   .test {

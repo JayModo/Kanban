@@ -1,8 +1,10 @@
 <template>
-  <input type="text" v-bind:class="[editing ? 'editing' : 'dormant', 'input-group-prepend', 'form-control', 'my-class']"
-    v-model="editValue" v-bind:placeholder="placeHolder" v-on:click="click($event)" v-on:keydown="keyDown($event)"
-    v-on:focusout="focusOut($event)" v-bind:readonly="!editing" />
-</template>
+  <textarea rows="1" type="text"
+    v-bind:class="[editing ? 'editing' : 'dormant', 'input-group-prepend', 'form-control', 'my-class']"
+    v-model="editValue" v-bind:placeholder="placeHolder" @change.prevent="resize($event)" @cut="delayedResize($event)"
+    @paste="delayedResize($event)" @click.prevent="click($event)" @keydown="keyDown($event)"
+    @focusout="focusOut($event)" v-bind:readonly="!editing" />
+  </template>
 
 <script>
   export default {
@@ -28,6 +30,14 @@
       this.initialValueToUse = this.initialValue;
     },
     methods: {
+      delayedResize() {
+        window.setTimeout(this.resize(event), 0);
+      },
+      resize(event) {
+        let textarea = event.target
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+      },
       cancel(event) {
         window.getSelection().removeAllRanges();
         this.editing = false;
@@ -70,6 +80,7 @@
             this.cancel(event);
             break;
           default:
+            this.delayedResize(event)
         }
       },
       focusOut(event) {

@@ -2,7 +2,8 @@
   <div class="col-3 list mr-3">
     <!-- TITLE -->
     <div class="input-group mb-3">
-      <click-edit :initialValue="boardList.title" :placeHolder="'List Title'" :enterKeyPress="titleChange">
+      <click-edit class="list-title" :initialValue="boardList.title" :placeHolder="'List Title'"
+        :enterKeyPress="titleChange">
       </click-edit>
       <div class="input-group-append">
         <div class="dropdown">
@@ -20,6 +21,9 @@
 
     <!-- DRAGGABLE CONTAINER -->
     <draggable v-model="myList" group="myGroup" class="list-group" :move="checkMove" @start="startDrag" @add="onDrop">
+
+
+
       <transition-group type="transition" :name="'flip-list'">
         <task :data-list="boardList._id" class="list-group-item" v-for="task in myList" :task="task" :key="task._id">
           {{ task.description }}
@@ -162,6 +166,10 @@
     box-shadow: 1px 2px 4px rgb(24, 109, 124);
   }
 
+  .list-title {
+    font-size: 1.618em;
+  }
+
   .new-task {
     cursor: pointer;
     color: grey;
@@ -202,7 +210,7 @@
     /* border: solid var(--task-area-border-color) 1px;
     padding: 2px;
     border-radius: var(--secondary-border-radius); */
-    min-height: 50px;
+    min-height: 50px !important;
     max-height: var(--list-scroll-height);
     overflow-y: scroll;
   }

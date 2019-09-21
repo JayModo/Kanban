@@ -132,8 +132,8 @@
   }
 
   :root {
-    --board-list-area-height: 80vh !important;
-    --list-scroll-height: calc(0.7975 * var(--board-list-area-height));
+    --board-list-area-height: 83vh !important;
+    --list-scroll-height: calc(0.8072 * var(--board-list-area-height));
 
     --root-color: red;
     --list-border-color: grey;

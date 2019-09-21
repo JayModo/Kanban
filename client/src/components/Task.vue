@@ -1,7 +1,7 @@
 <template>
   <!-- this is our title for tasks -->
   <div class="task">
-    <div class="input-group mb-3">
+    <div class="input-group">
       <click-edit class="task-edit" :initialValue="task.description" :placeHolder="'Task...'"
         :enterKeyPress="clickEdit">
       </click-edit>
