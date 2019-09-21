@@ -2,8 +2,8 @@
   <textarea rows="1" type="text" class="click-edit"
     v-bind:class="[editing ? 'editing' : 'dormant', 'input-group-prepend', 'form-control', 'my-class']"
     v-model="editValue" v-bind:placeholder="placeHolder" @change.prevent="resize($event)" @cut="delayedResize($event)"
-    @paste="delayedResize($event)" @click.prevent="click($event)" @keydown="keyDown($event)"
-    @focusout="focusOut($event)" v-bind:readonly="!editing" />
+    @paste="delayedResize($event)" @click="click($event)" @keydown="keyDown($event)" @focusout="focusOut($event)"
+    v-bind:readonly="!editing" />
   </template>
 
 <script>
@@ -48,12 +48,6 @@
         window.setTimeout(this.resize(event), 0);
       },
       resize(event) {
-        // let textArea = this.getTextArea()
-
-        // if (!textarea) {
-        //   textarea = event.target
-        // }
-
         let textarea = this.$el
 
         textarea.style.height = 'auto';
