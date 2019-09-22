@@ -12,7 +12,7 @@
         <button class="btn btn-danger" v-on:click="deleteBoard(board._id)"><i class="far fa-trash-alt"></i>
         </button>
         <router-link id="boardTitles" :to="{name: 'board', params: {boardId: board._id}}">
-          <h7> {{board.title}} </h7>
+          <h2> {{board.title}} </h2>
         </router-link>
       </div>
     </div>

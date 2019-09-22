@@ -62,7 +62,7 @@
           this.createNewTask()
           setTimeout(() => {
             this.$el.scrollIntoView()
-          }, 1000)
+          }, 50)
         }
       },
       checkMove(event, originalEvent) {
