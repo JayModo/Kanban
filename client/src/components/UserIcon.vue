@@ -58,8 +58,8 @@
     border-radius: 50%;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.534);
 
-    font-size: 0.95em;
-    font-weight: bold;
+    /* font-size: 0.95em;
+    font-weight: bold; */
 
     display: flex;
     justify-content: center;

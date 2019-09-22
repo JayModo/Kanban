@@ -13,7 +13,7 @@ let _schema = new Schema({
   email: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
   imgUrl: { type: String },
-  color: {type: String, default: '#FFFFFF'}
+  color: { type: String, default: '#a7a7a7' }
 }, { timestamps: true })
 
 //schema.methods are used to add a method to a Model instance

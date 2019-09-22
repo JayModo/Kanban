@@ -58,6 +58,7 @@
     align-items: center;
     align-content: center;
     justify-content: flex-start;
+    margin-bottom: 5px;
   }
 
   .delete {
@@ -68,7 +69,7 @@
   }
 
   .test {
-    color: #1d5ed6;
+    color: #a7a7a7;
   }
 
   .delete:hover {
