@@ -1,6 +1,6 @@
 <template>
-  <div v-if="comment" class="comment row d-flex">
-    <div class="user">{{ authorInitial() }}</div>
+  <div v-if="comment" class="comment">
+    <user-icon class="u-icon" :user="comment.user" />
     <click-edit class="comment-edit" :initialValue="comment.description" :placeHolder="'Comment...'"
       :enterKeyPress="submitEdit">
     </click-edit>
@@ -44,6 +44,13 @@
 </script>
 
 <style scoped>
+  .u-icon {
+    min-height: 32px !important;
+    min-width: 32px !important;
+    max-height: 32px !important;
+    max-width: 32px !important;
+  }
+
   .comment {
     display: flex;
     flex-direction: row;
@@ -53,28 +60,15 @@
     justify-content: flex-start;
   }
 
-  .user {
-    min-height: 23px !important;
-    min-width: 23px !important;
-    max-height: 23px !important;
-    max-width: 23px !important;
-
-    font-size: 0.95em;
-    font-weight: bold;
-    border-radius: 50%;
-    border: solid rgb(134, 134, 134) 1px;
-    color: rgb(70, 70, 70);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
   .delete {
     float: right;
     cursor: pointer;
     color: red;
     display: none;
+  }
+
+  .test {
+    color: #1d5ed6;
   }
 
   .delete:hover {

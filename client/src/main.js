@@ -8,10 +8,13 @@ import AuthService from "./AuthService";
 import MyModal from './components/Modal.vue'
 import Collaborators from './components/Collaborators'
 import Collaborator from './components/Collaborator'
+import UserIcon from './components/UserIcon'
 
 Vue.component('my-modal', MyModal);
 Vue.component('collaborators', Collaborators);
 Vue.component('collaborator', Collaborator);
+Vue.component('user-icon', UserIcon)
+
 
 // document.getElementById('').getElementsByClassName()
 
