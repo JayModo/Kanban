@@ -31,7 +31,7 @@
 
     <!-- <my-modal @close="showModal = false" :show-modal="showModal"></my-modal> -->
     <my-modal :closeCallBack="modalCloseCallBack" :showModal="showModal">
-      <user v-if="modalUsage === MODAL_USAGE.USER" />
+      <user v-if="modalUsage === MODAL_USAGE.USER" :cancelCallBack="modalCloseCallBack" />
       <collaborators v-if="modalUsage === MODAL_USAGE.COLLABORATORS" :cancelCallBack="modalCloseCallBack" />
     </my-modal>
   </div>
@@ -59,6 +59,9 @@
       }
     },
     computed: {
+      user(){
+        return this.$store.state.Auth.user
+      },
       backgroundImg() {
         let url = ''
         let page = this.$route.name

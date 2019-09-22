@@ -13,6 +13,7 @@ export default class AuthController {
             .get('/authenticate', this.authenticate)
             .get('/users', this.getUsers)
             .delete('/logout', this.logout)
+            .put('/users', this.editUser)
             .use(this.defaultRoute)
     }
 
@@ -20,6 +21,19 @@ export default class AuthController {
         next({ status: 404, message: 'No Such Route' })
     }
 
+    async editUser(req, res, next) {
+        try {
+            let user = await _userService.findOneAndUpdate(
+                { _id: req.body._id },
+                req.body,
+                { new: true }
+            )
+            return res.status(201).send(user)
+        } catch (error) {
+            error.message = 'AuthController.js editUser()'
+            next(error)
+        }
+    }
     async getUsers(req, res, next) {
         try {
 

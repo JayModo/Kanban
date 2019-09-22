@@ -74,6 +74,17 @@ export default {
       } catch (error) {
         console.error('store-modules > actions > getUsers()')
       }
+    },
+
+    async editUser({commit}, user) {
+      try {
+        let endPoint = `users`
+        let axiosRes = await api.put(endPoint, user)
+        let updatedUser = axiosRes.data
+        commit('setUser', updatedUser)
+      } catch (error) {
+        console.error('store-modules > actions > editUser()')
+      }
     }
   }
 };
