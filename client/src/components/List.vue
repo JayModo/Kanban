@@ -1,8 +1,8 @@
 <template>
-  <div class="col-3 list mr-3">
+  <div :id="boardList._id" class="col-3 list mr-3">
     <!-- TITLE -->
     <div class="input-group mb-3">
-      <click-edit class="list-title" :initialValue="boardList.title" :placeHolder="'List Title'"
+      <click-edit class="list-title" :initialValue="boardList.title" :placeHolder="'List Title...'"
         :enterKeyPress="titleChange">
       </click-edit>
       <div class="input-group-append">
@@ -59,10 +59,24 @@
     methods: {
       createTaskIfNew() {
         if (this.boardList.title === '') {
+          // setTimeout(() => {
+          //   this.createNewTask()
+          // }, 50)
+
           this.createNewTask()
+
           setTimeout(() => {
             this.$el.scrollIntoView()
-          }, 50)
+            // setTimeout(() => {
+            //   let title = this.$el.getElementsByClassName('list-title')[0]
+            //   title.click()
+            // }, 500)
+          }, 100)
+
+          setTimeout(() => {
+            let title = this.$el.getElementsByClassName('list-title')[0]
+            title.click()
+          }, 500)
         }
       },
       checkMove(event, originalEvent) {
@@ -87,7 +101,8 @@
         let task = {
           list: this.boardList._id,
           user: this.userId(), // userId() is a mixin. SEE main.js (client)
-          board: this.boardList.board
+          board: this.boardList.board,
+          description: ''
         };
         this.$store.dispatch("createNewTask", task);
       },
@@ -153,7 +168,10 @@
     mounted() {
       let listId = this.boardList._id;
       this.$store.dispatch("getTasksByListId", listId);
-      this.createTaskIfNew()
+      setTimeout(() => {
+        this.createTaskIfNew()
+      }, 0)
+
     }
   };
 </script>

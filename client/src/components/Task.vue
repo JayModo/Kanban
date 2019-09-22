@@ -53,6 +53,22 @@
       }
     },
     methods: {
+      selectIfNew() {
+        let clickEdit = this.$el.getElementsByClassName('task-edit')[0]
+        if (this.task.description === '') {
+          let list = document.getElementById(this.task.list)
+          let listTitle = list.getElementsByClassName('list-title')[0]
+          if (listTitle && listTitle.value !== '') {
+            setTimeout(() => {
+              clickEdit.click()
+            }, 50)
+          } else if (listTitle.value === '') {
+            setTimeout(() => {
+              listTitle.click()
+            }, 50)
+          }
+        }
+      },
       deleteTask() {
         this.$store.dispatch('deleteTask', this.task)
       },
@@ -77,6 +93,7 @@
     },
     mounted() {
       this.$store.dispatch("getCommentsByTaskId", this.task._id);
+      this.selectIfNew()
     }
   };
 </script>

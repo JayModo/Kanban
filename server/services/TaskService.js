@@ -4,7 +4,7 @@ let Schema = mongoose.Schema
 let ObjectId = Schema.Types.ObjectId
 
 let _schema = new Schema({
-  description: { type: String, required: true, default: "New Task" },
+  description: { type: String, default: '' },
   list: { type: ObjectId, ref: 'List' },
   user: { type: ObjectId, ref: 'User' },
   board: { type: ObjectId, ref: 'Board' },
