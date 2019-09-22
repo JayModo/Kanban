@@ -5,7 +5,7 @@
         :enterKeyPress="changeBoardTitle">
       </click-edit>
     </div>
-    <div class="scrolling-wrapper">
+    <div id="board-lists-continer" class="scrolling-wrapper">
       <list v-if="lists" class="list" v-for="list in lists" :boardList="list"></list>
     </div>
   </div>

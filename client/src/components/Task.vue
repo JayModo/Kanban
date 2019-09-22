@@ -82,6 +82,14 @@
 </script>
 
 <style scoped>
+  .input-group-append {
+    z-index: 0;
+  }
+
+  .input-group-append:hover {
+    z-index: 1000 !important;
+  }
+
   .task {
     border-radius: var(--tertiary-border-radius);
     margin-bottom: 3px;

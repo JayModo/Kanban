@@ -58,18 +58,12 @@
     },
     methods: {
       createTaskIfNew() {
-        // debugger
-
         if (this.boardList.title === '') {
           this.createNewTask()
+          setTimeout(() => {
+            this.$el.scrollIntoView()
+          }, 1000)
         }
-
-        return
-
-        // let titleElement = this.$el.getElementsByClassName('list-title')[0]
-        // if (titleElement && titleElement.value === '') {
-        //   this.createNewTask()
-        // }
       },
       checkMove(event, originalEvent) {
         // Stuff
