@@ -1,10 +1,5 @@
 <template>
-  <div class="container-fluid test">
-    <div class="row">
-      <click-edit class="board-title" v-if="board.title" :initialValue="board.title" :placeHolder="'Board Title...'"
-        :enterKeyPress="changeBoardTitle">
-      </click-edit>
-    </div>
+  <div class="container-fluid">
     <div id="board-lists-continer" class="scrolling-wrapper">
       <list v-if="lists" class="list" v-for="list in lists" :boardList="list"></list>
     </div>
@@ -25,16 +20,7 @@
       },
       tasks() {
         return this.$store.state.Tasks.tasks;
-      },
-      board() {
-        //forceUpdate is forcing the view to update on load not recommended all the time
-        // if (!this.$store.state.activeBoard.title) {
-        //   this.$forceUpdate()
-        //   return
-        // }
-        // let result = this.$store.state.activeBoard
-        return this.$store.state.Boards.activeBoard
-      },
+      }
     },
     mounted() {
       console.log('Board.vue mounted(): try using store-modules/boards.js actions: loadBoard()')
@@ -51,46 +37,17 @@
       getTasksByListId(listId) {
         let result = this.$store.state.Tasks.tasks[listId];
         return result;
-      },
-
-      // createList() {
-      //   this.$store.dispatch("createList", this.getList());
-      // },
-      // getList() {
-      //   let result = {
-      //     title: "",
-      //     user: this.userId, // userId is a mixin in main.js (client)
-      //     board: this.$route.params.boardId
-      //   };
-      //   return result;
-      // },
-      changeBoardTitle(newValue) {
-        let board = {
-          _id: this.board._id,
-          title: newValue
-        }
-
-        this.$store.dispatch('editBoard', board)
       }
     }
   };
 </script>
 <style scoped>
-  .board-title {
-    text-align-last: center;
-    margin-bottom: 10px;
-    font-size: 2rem;
-  }
-
   .scrolling-wrapper {
+    margin-top: 15px !important;
     overflow-x: scroll !important;
     overflow-y: hidden !important;
     white-space: nowrap !important;
     max-height: var(--board-list-area-height);
     min-height: var(--board-list-area-height);
-  }
-
-  .test {
-    max-height: 75vh !important;
   }
 </style>

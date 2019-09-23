@@ -6,13 +6,19 @@ import AuthService from "./AuthService";
 //Vue.config.productionTip = false
 
 import MyModal from './components/Modal.vue'
+import BoardTitle from './components/BoardTitle'
+import ClickEdit from './components/ClickEdit'
 import Collaborators from './components/Collaborators'
 import Collaborator from './components/Collaborator'
 import UserIcon from './components/UserIcon'
+import LoggedInUser from './components/LoggedInUser'
 
-Vue.component('my-modal', MyModal);
+Vue.component('board-title', BoardTitle)
+Vue.component('click-edit', ClickEdit)
 Vue.component('collaborators', Collaborators);
 Vue.component('collaborator', Collaborator);
+Vue.component('logged-in-user', LoggedInUser)
+Vue.component('my-modal', MyModal);
 Vue.component('user-icon', UserIcon)
 
 

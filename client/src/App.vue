@@ -4,28 +4,23 @@
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css"
         integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 
-      <nav id="navColor" class="navbar shadow p-3 mb-2 rounded navbar-light bg-light justify-content-between">
+      <nav id="navColor" class="navbar shadow rounded navbar-light bg-light justify-content-between">
+        <router-link class="navbar-brand" to="/boards">
+          <i id="theK" class="fab fa-kickstarter-k"></i>anban <span></span>
+          <i id="theK" class="fab fa-kickstarter-k"></i>abana <span></span>
+          <i id="umbrella" class="fas fa-umbrella-beach"></i>
+        </router-link>
 
-        <a class="navbar-brand"><i id="theK" class="fab fa-kickstarter-k"></i>anban
-          <i id="theK" class="fab fa-kickstarter-k"></i>abana <i id="umbrella" class="fas fa-umbrella-beach"></i></a>
-
-        <form class="form">
-          <div class="button-container">
-            <button v-show="isBoardPage" class="btn btn-primary" @click="createList">
-              <i class="fas fa-clipboard-list"></i> New List
-            </button>
-            <button class="btn btn-primary" @click="showModalForm(MODAL_USAGE.USER)">Edit User</button>
-            <button class="btn btn-primary" v-show="isBoardPage" @click="showModalForm(MODAL_USAGE.COLLABORATORS)">Edit
-              Collaborators</button>
-          </div>
+        <form class="form board-title-form" v-if="board.title && isBoardPage">
+          <board-title :showModalCallBack="showModalForm" />
         </form>
 
         <form class="form">
-          <router-link id="log-out" v-show="!isLogin" to="/login"> logout <i class="fas fa-sign-out-alt"></i>
-          </router-link>
+          <logged-in-user class="logged-in-user" :editCallBack="showModalForm"></logged-in-user>
+          <!-- </router-link> -->
         </form>
-
       </nav>
+
       <router-view />
     </div>
 
@@ -59,8 +54,15 @@
       }
     },
     computed: {
-      user(){
+      user() {
         return this.$store.state.Auth.user
+      },
+      board() {
+        return this.$store.state.Boards.activeBoard
+      },
+      isBoardPage() {
+        let result = this.$route.name == "board"
+        return result
       },
       backgroundImg() {
         let url = ''
@@ -83,27 +85,12 @@
         }
         return result
       },
-      isBoardPage() {
-        let result = this.$route.name == "board"
-        return result
-      },
       isLogin() {
         let result = (this.$route.name == "login")
         return result
       }
     },
     methods: {
-      createList() {
-        this.$store.dispatch("createList", this.getList());
-      },
-      getList() {
-        let result = {
-          title: "",
-          user: this.userId, // userId is a mixin in main.js (client)
-          board: this.$route.params.boardId
-        };
-        return result;
-      },
       showModalForm(modalUsage) {
         this.modalUsage = modalUsage
         this.showModal = true
@@ -118,25 +105,9 @@
 </script>
 
 <style>
-  #log-out {
-    margin-left: 5px;
-    float: right;
-  }
-
-  .page-img {
-    min-height: 100vh !important;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-  }
-
-  #theK {
-    transform: rotate(-10deg);
-  }
-
   :root {
-    --board-list-area-height: 83vh !important;
-    --list-scroll-height: calc(0.78 * var(--board-list-area-height));
+    --board-list-area-height: 88vh !important;
+    --list-scroll-height: calc(0.84 * var(--board-list-area-height));
 
     --root-color: red;
     --list-border-color: grey;
@@ -150,6 +121,50 @@
     --secondary-border-radius: 7px;
     --tertiary-border-radius: 4px;
   }
+
+  .navbar {
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+
+    background-image: linear-gradient(to right, rgba(87, 153, 240, 0.473), rgba(244, 239, 189, 0.541)) !important;
+    border: 1px solid #77a9ff54;
+    box-shadow: 2px 4px 7px rgb(18, 85, 85);
+  }
+
+  .navbar-brand {
+    font-size: 2.5em;
+    color: #2c3e5071 !important;
+  }
+
+  .logged-in-user {
+    color: #2c3e5071 !important;
+  }
+
+  .board-title {
+    text-align-last: center;
+    margin-bottom: 10px;
+    font-size: 2rem;
+  }
+
+  .board-title-form {
+    margin-top: 10px !important;
+    margin-bottom: 0px !important;
+    padding: 0px !important;
+  }
+
+  .page-img {
+    min-height: 100vh !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #theK {
+    transform: rotate(-10deg);
+  }
+
+
 
   /* The Scroll Bars */
   /* width */
@@ -185,25 +200,7 @@
     color: #2c3e50;
   }
 
-  #navColor {
-    background-image: linear-gradient(to right, rgba(87, 153, 240, 0.473), rgba(244, 239, 189, 0.541)) !important;
-    padding: 10px;
-    border: 1px solid #77a9ff54;
-    box-shadow: 2px 4px 7px rgb(18, 85, 85);
-  }
 
-  #nav {
-    padding: 30px;
-  }
-
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
 
   .button-container {
     width: 100%;
