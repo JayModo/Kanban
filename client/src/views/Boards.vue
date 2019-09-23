@@ -7,13 +7,12 @@
         <input type="text" placeholder="description" v-model="newBoard.description">
         <button class="btn btn-primary" type="submit">Create Board</button>
       </form>
-      <h2>Colab Count: {{ collaboratorCount }}</h2>
       <div v-for="board in boards" :boards="board" :key="board._id">
         <button v-if="checkPrivliges(board)" class="btn btn-danger" v-on:click="deleteBoard(board._id)"><i
             class="far fa-trash-alt"></i>
         </button>
         <router-link v-if="checkPrivliges(board)" id="boardTitles" :to="{name: 'board', params: {boardId: board._id}}">
-          <h2> {{board.title}} </h2>
+          <h4> {{board.title}} </h4>
         </router-link>
       </div>
     </div>

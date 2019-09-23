@@ -27,6 +27,14 @@
       ClickEdit
     },
     methods: {
+      selectIfNew() {
+        if (this.comment.description === '') {
+          setTimeout(() => {
+            let comment = this.$el.getElementsByClassName('comment-edit')[0]
+            comment.click()
+          }, 50)
+        }
+      },
       authorInitial() {
         let result = this.comment.user.name.charAt(0).toUpperCase();
         return result;
@@ -39,6 +47,9 @@
       deleteComment() {
         this.$store.dispatch('deleteComment', this.comment)
       }
+    },
+    mounted(){
+      this.selectIfNew()
     }
   };
 </script>
