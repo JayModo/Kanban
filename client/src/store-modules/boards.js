@@ -58,12 +58,18 @@ export default {
       }
     },
 
-    async getBoards({ commit, dispatch }) {
+    async getBoards({ commit, dispatch, state }) {
       try {
         let axiosRes = await api.get("");
         let boards = axiosRes.data;
         commit("setBoards", boards);
-      } catch (error) { }
+        state.boards.forEach(board => {
+          let boardId = board._id
+          dispatch("getCollaborators", boardId)
+        })
+      } catch (error) {
+        console.error('store-modules > boards.js > actions: getBoards()')
+      }
     },
     async getBoardById({ dispatch, commit }, boardId) {
       try {

@@ -35,7 +35,7 @@ Vue.mixin({
       let collaborators = this.$store.state.Collaborators.collaborators[boardId] || []
       let collaboratorIds = new Set(
         collaborators.map(c => {
-          return c._id;
+          return c.user_id;
         })
       );
       let result = uid === creatorId || collaboratorIds.has(uid);

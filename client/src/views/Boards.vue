@@ -7,11 +7,12 @@
         <input type="text" placeholder="description" v-model="newBoard.description">
         <button class="btn btn-primary" type="submit">Create Board</button>
       </form>
-
+      <h2>Colab Count: {{ collaboratorCount }}</h2>
       <div v-for="board in boards" :boards="board" :key="board._id">
-        <button class="btn btn-danger" v-on:click="deleteBoard(board._id)"><i class="far fa-trash-alt"></i>
+        <button v-if="checkPrivliges(board)" class="btn btn-danger" v-on:click="deleteBoard(board._id)"><i
+            class="far fa-trash-alt"></i>
         </button>
-        <router-link id="boardTitles" :to="{name: 'board', params: {boardId: board._id}}">
+        <router-link v-if="checkPrivliges(board)" id="boardTitles" :to="{name: 'board', params: {boardId: board._id}}">
           <h2> {{board.title}} </h2>
         </router-link>
       </div>
@@ -42,17 +43,35 @@
     computed: {
       boards() {
         return this.$store.state.Boards.boards;
+      },
+      collaborators() {
+        return this.$store.state.Collaborators.collaborators
+      },
+      collaboratorCount() {
+        return Object.keys(this.collaborators).length
       }
     },
 
     methods: {
       deleteBoard(boardId) {
-        debugger
         this.$store.dispatch('deleteBoard', boardId)
       },
       addBoard() {
         this.$store.dispatch("addBoard", this.newBoard);
         this.newBoard = { title: "", description: "" };
+      },
+      checkPrivliges(board) {
+        let uid = this.$store.state.Auth.user._id;
+        let creatorId = board.user
+        let boardId = board._id
+        let collaborators = this.collaborators[boardId] || []
+        let collaboratorIds = new Set(
+          collaborators.map(c => {
+            return c.user._id;
+          })
+        );
+        let result = uid === creatorId || collaboratorIds.has(uid);
+        return result;
       }
     }
   };
