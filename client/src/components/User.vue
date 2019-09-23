@@ -7,12 +7,9 @@
 
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <span class="input-group-text"></span>Picture</span>
+        <span class="input-group-text">Picture Url</span>
       </div>
-      <div class="custom-file">
-        <input type="file" class="custom-file-input" id="file-place-hoder">
-        <label class="custom-file-label" for="file-place-hoder">Choose file</label>
-      </div>
+      <input v-model="userData.imgUrl" type="text" placeholder="Url...">
     </div>
 
     <div class="form-group">

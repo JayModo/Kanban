@@ -61,6 +61,10 @@
     /* font-size: 0.95em;
     font-weight: bold; */
 
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
     display: flex;
     justify-content: center;
     align-items: center;
